@@ -2,12 +2,24 @@ import pandas as pd
 import os
 from collections import Counter
 import whisper
+import yt_dlp
 
 eden_2023_df = pd.read_csv('eden_ben_zaken_songs.csv')
 
 # הורדת אודיו מהיוטיוב (קישור יש לעדכן לפי ההופעה הרצויה)
 url = "https://www.youtube.com/watch?v=X83PNKZLwYU"
-os.system(f"yt-dlp -x --audio-format mp3 {url} -o 'eden_live.%(ext)s'")
+ydl_opts = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+    'outtmpl': 'eden_live.%(ext)s'
+}
+
+with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    ydl.download([url])
 print("✅ שלב 1: הורדת האודיו הסתיימה")
 
 # תמלול האודיו

@@ -1,2 +1,23 @@
+# Ignore Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Ignore system files
+.DS_Store
+*.log
+
+# Ignore model files and large data
+*.pkl
+*.mp3
+*.wav
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints/
+
+# dotenv
+.env
+
 eden_live.mp3
 eden_live.mp3
